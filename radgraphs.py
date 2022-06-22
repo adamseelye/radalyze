@@ -69,12 +69,9 @@ class graph:
             print("Data Error")
 
         try:
-
+            
             plt.title('Radiation Events over Time')
-#            plt.clc()
             plt.plotsize(120, 35)
-            plt.xlabel=("XLABEL")
-            plt.ylabel=("YLABEL")
 
             y1 = df['GAMMA COUNT RATE R02 (CPM)']
             y2 = df['GAMMA COUNT RATE R05 (CPM)']
@@ -84,14 +81,7 @@ class graph:
             plt.plot(y2, label="Gamma Detector Channel 05")
             plt.plot(y3, label="Gamma Detector Channel 09")
 
-        except:
-
-            print("Graph Error")
-
-        try:
-
             plt.show()
-            
 
         except:
-            print("Output Error")
+            print("Graph Error")
