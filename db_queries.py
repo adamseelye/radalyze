@@ -31,6 +31,10 @@ class Queries:
 
             print(f"User {name} successfully added to database")
 
+            sql = "INSERT INTO proj_0.crypto (`enc`, `UID`) VALUES (%s, %s);"
+            self.curs.execute(sql,(hashed, UID))
+            self.conn.commit()
+
         except mysql.connector.Error as error:
             print(f"Error creating user: {error}")
 
@@ -57,7 +61,6 @@ class Queries:
 
                 user_pwd = password
                 check_pass = hashedPassword.check_func(user_pwd, byte_hash)
-                print("Check password success")
 
             except:
                 print("Password error!")
@@ -80,6 +83,17 @@ class Queries:
 
         except:
             print("Delete Statement Error")
+
+
+    def update_user(self, uid, user_input):
+
+        sql = f"UPDATE proj_0.users SET `name` = '{user_input}' WHERE UID = '{uid}';"
+        self.curs.execute(sql)
+        self.conn.commit()
+
+        print(f"Successfully updated name to {user_input}")
+
+        return
 
 
     def login(self):

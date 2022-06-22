@@ -18,7 +18,7 @@ def mainUI():
 
 def main_func():
 
-        user_in = input("Please (L)ogin, (C)reate a new user, (D)elete a user, or (E)xit: ")
+        user_in = input("Please (L)ogin, (C)reate a new user, (D)elete a user, (U)pdate your name, or (E)xit: ")
 
         if user_in == 'c' or user_in == 'C':
             obj.create_user()
@@ -29,6 +29,15 @@ def main_func():
         elif user_in == 'l' or user_in == 'L':
             obj.login()
             prg = progFunctions.prog_continue()
+
+        elif user_in == 'u' or user_in == 'U':
+            uid = input("Please enter the username you would like to edit: ")
+            user_input = input("Please enter the new name (this is not your username, but your real name stored in the database): ")
+
+            try:
+                obj.update_user(uid, user_input)
+            except:
+                print("Username edit failed")
 
         elif user_in == 'e' or user_in == 'E':
             print("Exiting")
