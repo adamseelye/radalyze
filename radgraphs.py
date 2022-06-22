@@ -1,5 +1,16 @@
 import plotext as plt
 import pandas as pd
+import connector
+import re
+from db_queries import Queries
+
+try:
+
+    connected_list = connector.db_connect.db_connection()
+    obj = Queries(connected_list[0], connected_list[1])
+
+except:
+    print("Database connection error: graphs")
 
 class graph:
     def radiation_graphs():
@@ -8,6 +19,19 @@ class graph:
 
             if state == 'z' or state == 'Z':
                 year = input("Please choose the year to analyze and enter the last two digits, from between 08 and 21: ")
+                
+                try:
+
+                    clean = re.split("'", str(obj.get_uid()))
+                    uid = clean[1]
+                    print(state)
+                    print(year)
+                    print(uid)
+                    obj.choice_log(state, year, uid)
+                except:
+                    print("log error")
+                    exit()
+
                 print("\n")
                 print(f"~~~Displaying radiation data from the Gamma detector in Tucson, Arizona for the year 20{year}~~~")
                 print("")

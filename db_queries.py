@@ -1,6 +1,7 @@
 from getpass import getpass
 from hashpassword import hashedPassword
 import mysql.connector
+import datetime
 
 
 
@@ -153,47 +154,11 @@ class Queries:
     def radFiles(self, choice):
             
         try:
-            if choice == 'a' or choice == 'A':
-                print("\n")
-                print("~~Add File Pointer To The Database~~")
-                print("")
-                file_name_in = input("Please enter the name of the file to add to the database: ")
-                add = f"INSERT INTO proj_0.raddata (file_name) VALUES ('raddata/{file_name_in}')"
-                sql = add
-                print(sql)
-
-                self.curs.execute(sql)
-                self.conn.commit()
-   
-            elif choice == 'u' or choice == 'U':
-                print("\n")
-                print("~~Update File Database Pointer~~")
-                print("")
-                file_name_in = input("Please enter the updated file name: ")
-                file_id_in = input("Please enter id of file: ")
-                update = f"UPDATE proj_0.raddata SET file_name='raddata/{file_name_in}' WHERE id = {file_id_in};"
-                sql = update
-                print(sql)
-
-                self.curs.execute(sql)
-                self.conn.commit()
-
-            elif choice == 'd' or choice == 'D':
-                print("\n")
-                print("~~Delete File Pointer From Database~~")
-                print("")
-                file_id_in = input("Please enter id of file to be deleted: ")
-                delete = f"DELETE FROM proj_0.raddata WHERE id = {file_id_in}"
-                sql = delete
-
-                self.curs.execute(sql)
-                self.conn.commit()
-
-            elif choice == 'q' or choice == 'Q':
+            if choice == 'q' or choice == 'Q':
                 print("\n")
                 print("~~Query Database File Table~~")
                 print("")
-                sql = f"SELECT * FROM proj_0.raddata;"
+                sql = f"SHOW TABLES;"
 
                 self.curs.execute(sql)
                 self.conn.commit()
@@ -209,3 +174,36 @@ class Queries:
                 print("Statement error")
         except:
             exit()
+
+    def get_uid(self):      # this is required for choice_log to work
+        sql = "SELECT `UID` FROM proj_0.users WHERE logged_in = 1;"
+
+        self.curs.execute(sql)
+        self.conn.commit()
+
+        result = self.curs.fetchall()
+        for i in result:
+            print(i)
+
+        return result
+
+    def choice_log(self, state, year, uid):
+        now = datetime.datetime.now()
+        log_text = f"State code: {state} .. Year: {year} || datetime: {now}"
+
+        sql = f"INSERT INTO proj_0.choice_log (user_graph_choice, `UID`) VALUES ('{log_text}', '{uid}');"
+
+        self.curs.execute(sql)
+        self.conn.commit()
+
+        return
+
+    def read_log(self, uid):
+        sql = f"SELECT (user_graph_choice) FROM proj_0.choice_log WHERE `UID` = '{uid}';"
+        
+        self.curs.execute(sql)
+        self.conn.commit()
+
+        result = self.curs.fetchall()
+
+        return result

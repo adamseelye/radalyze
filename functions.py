@@ -1,7 +1,7 @@
 from radgraphs import graph
 from db_queries import Queries
-#from ui import main_func
 import connector
+import re
 
 try:
     connected_list = connector.db_connect.db_connection()
@@ -23,16 +23,26 @@ class progFunctions:
             try:
                 while menu_cont == True:
                     print("What would you like to do?")
-                    prog_choice = input("(V)iew radiation graphs, (A)lter files, or (E)xit: ")
+                    prog_choice = input("(V)iew radiation graphs, (Q)uery database, or (E)xit: ")
 
-                    if prog_choice == 'a' or prog_choice == 'A':
+                    if prog_choice == 'q' or prog_choice == 'Q':
                         print("Alter Database Files")
                         try:
-                            choice = input("Please choose whether to (a)dd, (u)pdate, (d)elete, (q)uery db, or (e)xit: ")
-                            Queries.radFiles(conn, choice)
+                            choice = input("Please choose whether to (q)uery db, (v)iew log, or (e)xit: ")
+                            if choice == 'v' or choice == 'V':
+                                clean = re.split("'", str(conn.get_uid()))
+                                uid = clean[1]
+#                                print(uid)
+                                log = conn.read_log(uid)
+                                print("Current graph query log:")
+                                print("\n")
+                                print(log)
+                            else:
+                                Queries.radFiles(conn, choice)
 
                         except:
                             print("Database error")
+                            exit()
 
                     elif prog_choice == 'v' or prog_choice == 'V':
                         print("Viewing radiation graph")
