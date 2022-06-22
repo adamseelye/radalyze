@@ -24,9 +24,6 @@ class graph:
 
                     clean = re.split("'", str(obj.get_uid()))
                     uid = clean[1]
-                    print(state)
-                    print(year)
-                    print(uid)
                     obj.choice_log(state, year, uid)
                 except:
                     print("log error")
@@ -46,21 +43,16 @@ class graph:
 
             elif state == 'l' or state == 'L':
 
-                    try:
+                year = input("Please choose the year to analyze and enter the last two digits, from between 08 and 21: ")
 
+                try:
                     clean = re.split("'", str(obj.get_uid()))
                     uid = clean[1]
-                    print(state)
-                    print(year)
-                    print(uid)
                     obj.choice_log(state, year, uid)
                 except:
                     print("log error")
                     exit()
 
-
-
-                year = input("Please choose the year to analyze and enter the last two digits, from between 08 and 21: ")
                 print("\n")
                 print(f"~~~Displaying radiation data from the Gamma detector in Baton Rouge, Louisiana for the year 20{year}~~~")
                 print("")
@@ -75,21 +67,17 @@ class graph:
 
             elif state == 's' or state == 'S':
 
+                year = input("Please choose the year to analyze and enter the last two digits, from between 06 and 21: ")
+
                 try:
 
                     clean = re.split("'", str(obj.get_uid()))
                     uid = clean[1]
-                    print(state)
-                    print(year)
-                    print(uid)
                     obj.choice_log(state, year, uid)
                 except:
                     print("log error")
                     exit()
 
-
-
-                year = input("Please choose the year to analyze and enter the last two digits, from between 06 and 21: ")
                 print("\n")
                 print(f"~~~Displaying radiation data from the Gamma detector in Boston, Massachussetts for the year 20{year}~~~")
                 print("")
@@ -104,21 +92,17 @@ class graph:
 
             elif state == 'm' or state == 'M':
 
+                year = input("Please choose the year to analyze and enter the last two digits, from between 17 and 21: ")
+
                 try:
 
                     clean = re.split("'", str(obj.get_uid()))
                     uid = clean[1]
-                    print(state)
-                    print(year)
-                    print(uid)
                     obj.choice_log(state, year, uid)
                 except:
                     print("log error")
                     exit()
 
-
-
-                year = input("Please choose the year to analyze and enter the last two digits, from between 17 and 21: ")
                 print("\n")
                 print(f"~~~Displaying radiation data from the Gamma detector in Kalispell, Montana for the year 20{year}~~~")
                 print("")
