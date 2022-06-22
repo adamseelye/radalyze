@@ -1,5 +1,6 @@
 from radgraphs import graph
 from db_queries import Queries
+#from ui import main_func
 import connector
 
 try:
@@ -17,40 +18,45 @@ class progFunctions:
     def prog_continue():
         try:
 
-            print("What would you like to do?")
-            prog_choice = input("(V)iew radiation graphs, (A)lter files, (P)revious menu, or (E)xit: ")
-            
+            menu_cont = True                # continue displaying menu after a function
+
             try:
+                while menu_cont == True:
+                    print("What would you like to do?")
+                    prog_choice = input("(V)iew radiation graphs, (A)lter files, or (E)xit: ")
 
-                if prog_choice == 'a' or prog_choice == 'A':
-                    print("Alter Files")
-                    try:
-                        choice = input("Please choose whether to (a)dd, (u)pdate, (d)elete, (q)uery db, or (e)xit: ")
-                        Queries.radFiles(conn, choice)
-                        print("altering")
+                    if prog_choice == 'a' or prog_choice == 'A':
+                        print("Alter Database Files")
+                        try:
+                            choice = input("Please choose whether to (a)dd, (u)pdate, (d)elete, (q)uery db, or (e)xit: ")
+                            Queries.radFiles(conn, choice)
 
-                    except:
-                        print("Database error")
+                        except:
+                            print("Database error")
 
-                elif prog_choice == 'v' or prog_choice == 'V':
-                    print("Viewing radiation graph")
-                    try:
-                        graph.radiation_graphs()
-                    except:
-                        print("Viewing Error")
+                    elif prog_choice == 'v' or prog_choice == 'V':
+                        print("Viewing radiation graph")
+                        try:
+                            graph.radiation_graphs()
+                        except:
+                            print("Viewing Error")
 
-                elif prog_choice == 'e' or prog_choice == 'E':
-                    return
+                    elif prog_choice == 'e' or prog_choice == 'E':
+                        from ui import main_func
+                        main_func()
+                        menu_cont = False
 
-                elif prog_choice == 'p' or prog_choice == 'P':
-                    print("Be sure to update this")
-                    return
+                    else:
+                        print("Input error")
+                        return
 
                 else:
-                    print("Error")
+                    menu_cont = False;
+                    exit()
+                    return
 
             except:
-                print("Error, please restart program")
-            
+                exit()
+                
         except:
-            print("Program start error")
+            exit()
