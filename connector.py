@@ -6,8 +6,8 @@ class db_connect:
         """call mysql.connector to connect to database"""
         try:
             mydb = mysql.connector.connect(host="192.168.1.206",
-                                           user="debadmin",
-                                           password="qetje8YawJvAANxa#?",
+                                           user=" ",
+                                           password=" ",
                                            database="proj_0")
             mycursor = mydb.cursor(buffered=True)
             return [mydb, mycursor]
