@@ -10,7 +10,11 @@ It is recommended to run the app in a virtual environment as well.
 
 Linux:
 
-```
+`
+  cd <directory>
+  
+  python -m venv .
+
   git clone https://github.com/adamseelye/radalyze
   
   pip install mysql-connector
@@ -18,7 +22,7 @@ Linux:
   pip install plotext
   pip install pandas
   
-```
+`
 
 The program will not run out of the box - 
 A MySQL DB must be defined by the user (the code points to a local-only IP address)
