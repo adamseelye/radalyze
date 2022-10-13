@@ -5,8 +5,24 @@ Radalyze is a Python app that reads historical Gamma Radiation detector data fro
 detectors based in different sites around the U.S.A. and displays the data in a graph
 format, all in a command line interface.
 
-To start using the app, simply download the source. Make sure Python 3 is installed
-and then run RADALYZE with the command "python3 radalyze.py" from the radalyze directory.
+To start using the app, there are a few Python packages that must be installed.
+It is recommended to run the app in a virtual environment as well.
+
+Linux:
+
+````
+  git clone https://github.com/adamseelye/radalyze
+  
+  pip install mysql-connector
+  pip install bcrypt
+  pip install plotext
+  pip install pandas
+  
+````
+
+The program will not run out of the box - 
+A MySQL DB must be defined by the user (the code points to a local-only IP address)
+Add the parameters in the file "connector.py" beginning on line 8.
 
 Thanks for checking it out!
 ~~~
