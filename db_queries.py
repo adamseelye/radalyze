@@ -25,13 +25,13 @@ class Queries:
             print("Password hashing error")
 
         try:
-            sql = "INSERT INTO proj_0.users (`name`, UID, `password`) VALUES (%s, %s, %s);"
+            sql = "INSERT INTO radalyze.users (`name`, UID, `password`) VALUES (%s, %s, %s);"
             self.curs.execute(sql,(name, UID, hashed))
             self.conn.commit()
 
             print(f"User {name} successfully added to database")
 
-            sql = "INSERT INTO proj_0.crypto (`enc`, `UID`) VALUES (%s, %s);"
+            sql = "INSERT INTO radalyze.crypto (`enc`, `UID`) VALUES (%s, %s);"
             self.curs.execute(sql,(hashed, UID))
             self.conn.commit()
 
@@ -50,7 +50,7 @@ class Queries:
         password = getpass("Please enter the password: ")
 
         try:
-            sql = f"SELECT `password` FROM proj_0.users WHERE UID = '{user_uid}';"
+            sql = f"SELECT `password` FROM radalyze.users WHERE UID = '{user_uid}';"
             self.curs.execute(sql)
             self.conn.commit()
 
@@ -68,7 +68,7 @@ class Queries:
 
             try:
                 if check_pass == True:
-                    sql = f"DELETE FROM proj_0.users WHERE (`UID` = '{user_uid}');"
+                    sql = f"DELETE FROM radalyze.users WHERE (`UID` = '{user_uid}');"
                     self.curs.execute(sql)
                     self.conn.commit()
 
@@ -87,7 +87,7 @@ class Queries:
 
     def update_user(self, uid, user_input):
 
-        sql = f"UPDATE proj_0.users SET `name` = '{user_input}' WHERE UID = '{uid}';"
+        sql = f"UPDATE radalyze.users SET `name` = '{user_input}' WHERE UID = '{uid}';"
         self.curs.execute(sql)
         self.conn.commit()
 
@@ -102,7 +102,7 @@ class Queries:
         UID = input("Please enter your username to login: ")
 
         try:
-            sql = f"SELECT `UID` FROM proj_0.users WHERE `UID` = '{UID}';"
+            sql = f"SELECT `UID` FROM radalyze.users WHERE `UID` = '{UID}';"
             self.curs.execute(sql)
             self.conn.commit()
 
@@ -110,7 +110,7 @@ class Queries:
 
             if result[0] == UID:
                 
-                sql = f"SELECT `password` FROM proj_0.users WHERE UID = '{UID}';"
+                sql = f"SELECT `password` FROM radalyze.users WHERE UID = '{UID}';"
                 self.curs.execute(sql)
                 self.conn.commit()
 
@@ -130,7 +130,7 @@ class Queries:
 
 
                 if check_pass == True:
-                    sql = f"UPDATE proj_0.users SET logged_in=1 WHERE UID = '{UID}';"
+                    sql = f"UPDATE radalyze.users SET logged_in=1 WHERE UID = '{UID}';"
                     self.curs.execute(sql)
                     self.conn.commit()
 
@@ -154,7 +154,7 @@ class Queries:
 
     def logout(self, UID):
         try:
-            sql = f"UPDATE proj_0.users SET logged_in=0 WHERE UID = '{UID}';"
+            sql = f"UPDATE radalyze.users SET logged_in=0 WHERE UID = '{UID}';"
             self.curs.execute(sql)
             self.conn.commit()
             print(f"You have logged out")
@@ -190,7 +190,7 @@ class Queries:
             exit()
 
     def get_uid(self):      # this is required for choice_log to work
-        sql = "SELECT `UID` FROM proj_0.users WHERE logged_in = 1;"
+        sql = "SELECT `UID` FROM radalyze.users WHERE logged_in = 1;"
 
         self.curs.execute(sql)
         self.conn.commit()
@@ -205,7 +205,7 @@ class Queries:
         now = datetime.datetime.now()
         log_text = f"State code: {state} .. Year: {year} || datetime: {now}"
 
-        sql = f"INSERT INTO proj_0.choice_log (user_graph_choice, `UID`) VALUES ('{log_text}', '{uid}');"
+        sql = f"INSERT INTO radalyze.choice_log (user_graph_choice, `UID`) VALUES ('{log_text}', '{uid}');"
 
         self.curs.execute(sql)
         self.conn.commit()
@@ -213,7 +213,7 @@ class Queries:
         return
 
     def read_log(self, uid):
-        sql = f"SELECT (user_graph_choice) FROM proj_0.choice_log WHERE `UID` = '{uid}';"
+        sql = f"SELECT (user_graph_choice) FROM radalyze.choice_log WHERE `UID` = '{uid}';"
         
         self.curs.execute(sql)
         self.conn.commit()
