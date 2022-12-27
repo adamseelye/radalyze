@@ -32,7 +32,6 @@ class progFunctions:
                             if choice == 'v' or choice == 'V':
                                 clean = re.split("'", str(conn.get_uid()))
                                 uid = clean[1]
-#                                print(uid)
                                 log = conn.read_log(uid)
                                 print("Current graph query log:")
                                 print("\n")
@@ -42,7 +41,7 @@ class progFunctions:
 
                         except:
                             print("Database error")
-                            exit()
+                            exit(1)
 
                     elif prog_choice == 'v' or prog_choice == 'V':
                         print("Viewing radiation graph")
@@ -62,11 +61,14 @@ class progFunctions:
 
                 else:
                     menu_cont = False;
-                    exit()
+                    exit(0)
                     return
 
             except:
-                exit()
+                print("Menu error, exiting")
+                exit(1)
                 
         except:
-            exit()
+            print("Error, program must exit")
+            exit(1)
+

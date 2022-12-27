@@ -1,5 +1,5 @@
 import mysql.connector
-import hidden
+import hidden           # Store username/password/database info in hidden.py
 
 class db_connect:
     @staticmethod
@@ -16,3 +16,4 @@ class db_connect:
 
         except mysql.connector.Error as error:
                 print(error)
+

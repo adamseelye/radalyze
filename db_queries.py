@@ -6,23 +6,27 @@ import datetime
 
 
 class Queries:
+    # Initialize Queries class
     def __init__(self, mydb, mycursor):
-        self.curs = mycursor
-        self.conn = mydb
+        self.curs = mycursor        # Cursor for iterating through DB data
+        self.conn = mydb            # Initialize DB connection
 
 
     def create_user(self):
 
         """Create new user in database"""
+        # No distinction between admin/regular users.
 
-        UID = input("Please enter a username: ")
+        UID = input("Please enter a username: ")    # UID used as foreign key
         name = input("Please enter your (real or pseudo) name: ")
         password = input("Please enter a (secure) password: ")
         
         try:
+            # Save hashed password in database.
             hashed = hashedPassword.hash_func(password)
         except:
             print("Password hashing error")
+            exit(1)
 
         try:
             sql = "INSERT INTO radalyze.users (`name`, UID, `password`) VALUES (%s, %s, %s);"
@@ -31,6 +35,7 @@ class Queries:
 
             print(f"User {name} successfully added to database")
 
+            # This is unnecessary for now; should use this table as fact
             sql = "INSERT INTO radalyze.crypto (`enc`, `UID`) VALUES (%s, %s);"
             self.curs.execute(sql,(hashed, UID))
             self.conn.commit()
@@ -46,6 +51,7 @@ class Queries:
 
         """DELETE a user from the database"""
 
+        # User must enter correct password to delete user
         user_uid = input("Please enter the username to delete: ")
         password = getpass("Please enter the password: ")
 
@@ -166,6 +172,7 @@ class Queries:
 
 
     def radFiles(self, choice):
+        # This function is unnecessary
             
         try:
             if choice == 'q' or choice == 'Q':
@@ -212,7 +219,7 @@ class Queries:
 
         return
 
-    def read_log(self, uid):
+    def read_log(self, uid):    # Log output needs better readability
         sql = f"SELECT (user_graph_choice) FROM radalyze.choice_log WHERE `UID` = '{uid}';"
         
         self.curs.execute(sql)
@@ -221,3 +228,4 @@ class Queries:
         result = self.curs.fetchall()
 
         return result
+
