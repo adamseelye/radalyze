@@ -36,7 +36,7 @@ class graph:
                 print("The Y axis displays the data point count collected over the entire year, with January at the origin")
                 print("\n")
 
-                df = pd.read_csv(f"raddata/az_tucson/AZ_TUCSON_20{year}.csv")
+                df = pd.read_csv(f"raddata/az_phoenix/AZ_PHOENIX_20{year}.csv")
                 df = df.groupby(['SAMPLE COLLECTION TIME', 'GAMMA COUNT RATE R02 (CPM)', 'GAMMA COUNT RATE R05 (CPM)', 'GAMMA COUNT RATE R09 (CPM)'])[['DOSE EQUIVALENT RATE (nSv/h)']].mean()
 
                 df.reset_index(inplace=True)
