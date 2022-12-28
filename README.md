@@ -32,6 +32,10 @@ Linux:
 The program will not run out of the box - \
 A MySQL DB must be defined by the user (the code points to a local-only IP address) \
 Add the parameters in the file "connector.py" beginning on line 8.
+
+The database table structure is defined in the file "proj_0.png".
+There are 3 tables; one containing User information, one containing logs,
+and one containing the encrypted user passwords.
 ****
 
 Thanks for checking it out!

@@ -1,8 +1,7 @@
-from getpass import getpass
 from hashpassword import hashedPassword
+from getpass import getpass         # getpass used for obscuring password input
 import mysql.connector
 import datetime
-
 
 
 class Queries:
@@ -22,7 +21,7 @@ class Queries:
         password = input("Please enter a (secure) password: ")
         
         try:
-            # Save hashed password in database.
+            # Save hashed password into database
             hashed = hashedPassword.hash_func(password)
         except:
             print("Password hashing error")

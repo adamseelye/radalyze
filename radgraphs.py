@@ -1,16 +1,18 @@
-import plotext as plt
-import pandas as pd
-import connector
-import re
+import plotext as plt   # Plot data on CLI
+import pandas as pd     # Work with Pandas dataframes
+import re               # Work with regular expressions
+
+import connector        
 from db_queries import Queries
 
 try:
 
-    connected_list = connector.db_connect.db_connection()
-    obj = Queries(connected_list[0], connected_list[1])
+    connected_list = connector.db_connect.db_connection()   # Create database connection
+    obj = Queries(connected_list[0], connected_list[1])     # Instantiate connection object
 
 except:
-    print("Database connection error: graphs")
+    print("Database connection error")
+    exit(1)
 
 class graph:
     def radiation_graphs():
@@ -21,10 +23,9 @@ class graph:
                 year = input("Please choose the year to analyze and enter the last two digits, from between 08 and 21: ")
                 
                 try:
-
-                    clean = re.split("'", str(obj.get_uid()))
-                    uid = clean[1]
-                    obj.choice_log(state, year, uid)
+                    clean = re.split("'", str(obj.get_uid()))   # Get UID but split at apostrophe
+                    uid = clean[1]                              # UID is object at index [1]
+                    obj.choice_log(state, year, uid)            # Log user choice to database
                 except:
                     print("log error")
                     exit()

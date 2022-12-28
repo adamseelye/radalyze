@@ -1,6 +1,4 @@
-from db_queries import Queries
 from ui import mainUI, main_func
-import connector
 
 
 try:
@@ -9,5 +7,6 @@ try:
     main_func()
 
 except:
-    ("Program execution failure")
+    print("Program execution failure")
+    exit(1)
 

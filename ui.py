@@ -7,6 +7,7 @@ try:
     obj = Queries(connected_list[0], connected_list[1])
 except:
     print("Database connection error")
+    exit(1)
 
 
 def mainUI():
@@ -17,7 +18,7 @@ def mainUI():
 
 
 def main_func():
-
+    # This is the main UI function
         user_in = input("Please (L)ogin, (C)reate a new user, (D)elete a user, (U)pdate your name, or (E)xit: ")
 
         if user_in == 'c' or user_in == 'C':
@@ -28,7 +29,8 @@ def main_func():
 
         elif user_in == 'l' or user_in == 'L':
             obj.login()
-            prg = progFunctions.prog_continue()
+            # This function prevents the app from exiting after a choice
+            progFunctions.prog_continue()
 
         elif user_in == 'u' or user_in == 'U':
             uid = input("Please enter the username you would like to edit: ")
@@ -38,11 +40,13 @@ def main_func():
                 obj.update_user(uid, user_input)
             except:
                 print("Username edit failed")
+                exit(1)
 
         elif user_in == 'e' or user_in == 'E':
             print("Exiting")
-            exit()
+            exit(0)
 
         else:
-            exit()
+            print("Program error")
+            exit(1)
 
