@@ -5,6 +5,7 @@
 import bcrypt
 
 class hashedPassword:
+    # Hash an input string
     def hash_func(password):
 
         bytes = password.encode('utf-8')    # UTF-8 byte encode password
@@ -13,6 +14,7 @@ class hashedPassword:
 
         return hash                 
 
+    # Check an input string against a hash
     def check_func(user_pwd, hashed):
         
         user_bytes = user_pwd.encode('utf-8')

@@ -17,9 +17,12 @@ except:
 class graph:
     def radiation_graphs():
         try:
+            # Ask user from which state to display data
             state = input("Please choose radiation data from Ari(Z)ona, (L)ouisiana, Ma(S)sachussetts, or (M)ontana: ")
 
+            # If statement to account for capitalization
             if state == 'z' or state == 'Z':
+                # Must use last two digits to get correct file
                 year = input("Please choose the year to analyze and enter the last two digits, from between 08 and 21: ")
                 
                 try:
@@ -38,8 +41,10 @@ class graph:
                 print("\n")
 
                 df = pd.read_csv(f"raddata/az_phoenix/AZ_PHOENIX_20{year}.csv")
+                # CSV files contain columns we don't need
                 df = df.groupby(['SAMPLE COLLECTION TIME', 'GAMMA COUNT RATE R02 (CPM)', 'GAMMA COUNT RATE R05 (CPM)', 'GAMMA COUNT RATE R09 (CPM)'])[['DOSE EQUIVALENT RATE (nSv/h)']].mean()
 
+                # Index must be reset to correctly display graph
                 df.reset_index(inplace=True)
 
             elif state == 'l' or state == 'L':
@@ -123,14 +128,17 @@ class graph:
             print("Data Error")
 
         try:
-            
+            # Graph options
+
             plt.title('Radiation Events over Time')
             plt.plotsize(120, 35)
 
+            # Set graph data columns
             y1 = df['GAMMA COUNT RATE R02 (CPM)']
             y2 = df['GAMMA COUNT RATE R05 (CPM)']
             y3 = df['GAMMA COUNT RATE R09 (CPM)']
 
+            # Display plot on command line
             plt.plot(y1, label="Gamma Detector Channel 02")
             plt.plot(y2, label="Gamma Detector Channel 05")
             plt.plot(y3, label="Gamma Detector Channel 09")

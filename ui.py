@@ -11,6 +11,7 @@ except:
 
 
 def mainUI():
+    # Basic UI script. This probably doesn't need to be a separate function.
     print("")
     print("RADALYZE")
     print("The radiation data visualizer")
@@ -22,6 +23,7 @@ def main_func():
         user_in = input("Please (L)ogin, (C)reate a new user, (D)elete a user, (U)pdate your name, or (E)xit: ")
 
         if user_in == 'c' or user_in == 'C':
+            # Call database connector object to perform create_user function
             obj.create_user()
 
         elif user_in == 'd' or user_in == 'D':
